@@ -1,0 +1,88 @@
+/* frontend/src/components/HealthMonitor.css */
+.health-container {
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.health-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #ddd;
+}
+.health-tabs button {
+  padding: 0.8rem 1.2rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #777;
+  border-bottom: 3px solid transparent;
+}
+.health-tabs button.active {
+  color: var(--primary-color);
+  border-bottom: 3px solid var(--primary-color);
+}
+.health-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: start;
+}
+.health-form h3 {
+  margin-top: 0;
+}
+.health-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.health-form input {
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.health-chart {
+  border-left: 1px solid #eee;
+  padding-left: 2rem;
+}
+/* frontend/src/components/HealthMonitor.css */
+
+/* ... (add this to the existing styles) ... */
+
+.tips-section {
+  margin-top: 1.5rem;
+}
+
+.tips-toggle {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+}
+
+.tips-content {
+  border: 1px solid #eee;
+  border-top: none;
+  padding: 1rem;
+  background-color: #fafafa;
+  border-radius: 0 0 4px 4px;
+}
+
+.tips-content h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.tips-content ul {
+  padding-left: 20px;
+  margin: 0;
+}

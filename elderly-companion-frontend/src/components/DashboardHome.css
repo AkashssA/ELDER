@@ -1,0 +1,37 @@
+/* src/components/DashboardHome.css */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.home-card {
+  height: 150px;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+.home-card:hover {
+  transform: translateY(-5px);
+}
+.home-card::before { /* This is the dark overlay */
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+}
+.home-card-content {
+  position: relative;
+  z-index: 2;
+}
+.home-card-content h3 {
+  margin: 0 0 0.5rem 0;
+}

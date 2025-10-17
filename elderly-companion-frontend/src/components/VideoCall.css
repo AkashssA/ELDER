@@ -1,0 +1,3 @@
+/* src/components/VideoCall.css */
+.videocall-container { text-align: center; padding: 1.5rem; }
+.videocall-button { display: inline-block; padding: 1rem 2rem; background-color: #28a745; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1.2rem; }

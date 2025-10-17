@@ -1,0 +1,51 @@
+/* src/components/SOSButton.css */
+.sos-container {
+  padding: 2rem;
+  text-align: center;
+  background-color: #fff0f0;
+  border: 2px solid #d9534f;
+  border-radius: 10px;
+  margin: 1rem auto;
+  max-width: 400px;
+}
+
+.sos-button {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #d9534f; /* Red color for emergency */
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  border: 5px solid #a94442;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.sos-button:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+.sos-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.sos-button:disabled {
+  background-color: #aaa;
+  border-color: #888;
+  cursor: not-allowed;
+}
+
+.sos-instructions {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.sos-feedback {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #a94442;
+}

@@ -1,0 +1,113 @@
+/* src/App.css (add this to the end) */
+
+.auth-form-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--card-bg-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.auth-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-form-container input[type="text"],
+.auth-form-container input[type="email"],
+.auth-form-container input[type="password"] {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.auth-button {
+  padding: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.auth-button:hover {
+  background-color: #3a7ac8;
+}
+
+.toggle-auth-button {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.toggle-auth-button:hover {
+  text-decoration: underline;
+}
+
+
+/* ... (add this to the end of the file) ... */
+.show-module-btn {
+  display: block;
+  margin: 2rem auto;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+/* Add this to the end of src/App.css */
+
+.theme-toggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+/* --- High-Contrast Dark Theme --- */
+.app-container.dark {
+  /* Larger base font size */
+  font-size: 18px; 
+
+  /* New color variables */
+  --primary-color: #f0ad4e; /* Bright Orange */
+  --background-color: #000000;
+  --text-color: #ffffff;
+  --card-bg-color: #1a1a1a;
+  --shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+.app-container.dark button {
+  /* Ensure buttons are also high-contrast */
+  background-color: var(--primary-color);
+  color: #000000;
+  font-weight: bold;
+}
+
+.app-container.dark .cancel-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.app-container.dark input {
+    background-color: #333;
+    color: white;
+    border-color: #555;
+}

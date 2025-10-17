@@ -1,0 +1,9 @@
+# Ignore all node_modules folders in any sub-directory
+**/node_modules
+
+# Ignore all .env files in any sub-directory
+**/.env
+
+# Ignore Mac and VSCode temporary files
+.DS_Store
+.vscode/

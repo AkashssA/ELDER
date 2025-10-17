@@ -1,0 +1,40 @@
+/* frontend/src/components/Scheduler.css */
+.scheduler-container {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.add-event-form {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.add-event-form form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.add-event-form input[type="text"],
+.add-event-form input[type="datetime-local"] {
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.calendar-wrapper {
+    border: 1px solid #ddd;
+}
+
+.calendar-tip {
+    text-align: center;
+    margin-top: 1rem;
+    font-style: italic;
+    color: #777;
+}

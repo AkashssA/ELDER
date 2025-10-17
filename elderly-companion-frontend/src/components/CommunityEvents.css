@@ -1,0 +1,45 @@
+/* src/components/CommunityEvents.css */
+.events-container {
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+.events-list {
+    display: grid;
+    gap: 1rem;
+}
+.event-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-left: 5px solid var(--primary-color);
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.event-card h3 { margin: 0.5rem 0; }
+.event-date { font-weight: bold; color: #555; margin-bottom: 0.5rem; }
+.event-type {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+.event-type.yoga { background-color: #28a745; }
+.event-type.bhajan { background-color: #fd7e14; }
+.event-type.game { background-color: #007bff; }
+.event-type.general { background-color: #6c757d; }
+.event-link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+}

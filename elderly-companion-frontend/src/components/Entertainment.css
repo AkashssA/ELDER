@@ -1,0 +1,92 @@
+/* frontend/src/components/Entertainment.css */
+.entertainment-container {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.search-form input {
+  flex-grow: 1;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.video-player {
+  margin: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.video-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.video-item {
+  cursor: pointer;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 0.5rem;
+  transition: box-shadow 0.2s;
+}
+
+.video-item:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.video-item img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.video-item p {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+
+.entertainment-container {
+  position: relative; /* Needed for the close button positioning */
+  /* ... */
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+.back-btn {
+  display: block;
+  margin: 1rem auto 0;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+
+.back-btn:hover {
+  background-color: #e0e0e0;
+}
