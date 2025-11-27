@@ -14,6 +14,7 @@ import MemoryGame from '../components/MemoryGame';
 import CommunityEvents from '../components/CommunityEvents';
 import Chatbot from '../components/Chatbot';
 import ProactiveAssistant from '../components/ProactiveAssistant';
+import VoiceControl from '../components/VoiceControl';
 import MoodTracker from '../components/MoodTracker';
 import { subscribeUser } from '../utils/subscribeUser';
 
@@ -121,6 +122,7 @@ const ElderlyDashboard = ({ onLogout }) => {
           {renderView()}
         </div>
       </div>
+      <VoiceControl onNavigate={handleVoiceNavigation} variant="floating" />
       <ProactiveAssistant />
     </div>
   );

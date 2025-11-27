@@ -90,12 +90,7 @@ export const yogaPoses = [
     description: 'Calms the mind and relieves stress.',
     imageUrl: '/prana_4.png',
   },
-  {
-    id: 15,
-    name: 'Victorious Breath (Ujjayi)',
-    description: 'Calms the nervous system and builds internal heat.',
-    imageUrl: '/prana_5.png',
-  },
+  
 ];
 
 export const prayers = [

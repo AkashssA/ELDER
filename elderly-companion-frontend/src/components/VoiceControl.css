@@ -1,8 +1,68 @@
 /* src/components/VoiceControl.css */
-.voice-control-container { text-align: center; margin: 1rem 0; }
-.mic-button { font-size: 2.5rem; width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--primary-color); cursor: pointer; }
-.mic-button.listening { animation: pulse 1.5s infinite; }
-.voice-feedback { margin-top: 0.5rem; font-style: italic; color: #555; }
+.voice-control-container {
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.voice-control-container.floating {
+    position: fixed;
+  z-index: 40;
+  background: rgba(15, 23, 42, 0.85);
+  padding: 0.65rem;
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  touch-action: none;
+}
+
+.voice-control-container.floating .mic-button {
+  width: 56px;
+  height: 56px;
+  font-size: 2rem;
+}
+
+.mic-button {
+  font-size: 2.5rem;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+  cursor: grab;
+  background: linear-gradient(135deg, #6c63ff, #a855f7);
+  color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  touch-action: none;
+}
+
+.mic-button.listening {
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 25px rgba(240, 173, 78, 0.8);
+  transform: scale(1.04);
+}
+
+.voice-control-container.floating .mic-button.listening {
+  animation: pulse 1s infinite;
+}
+
+.voice-feedback {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: #555;
+}
+
+.voice-control-container.floating .voice-feedback {
+  display: none;
+}
+
+.floating-label {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 0.8rem;
+  color: #e0e7ff;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 @keyframes pulse {
   0% { box-shadow: 0 0 0 0 rgba(240, 173, 78, 0.7); }
   70% { box-shadow: 0 0 0 20px rgba(240, 173, 78, 0); }

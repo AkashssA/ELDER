@@ -1,7 +1,6 @@
 import React from 'react';
 import SOSButton from './SOSButton';
 import VoiceControl from './VoiceControl';
-import RequestHelp from './RequestHelp';
 import './DashboardHome.css';
 
 // This list of items now uses your local images from the /public folder
@@ -83,9 +82,6 @@ const DashboardHome = ({ setActiveView, onNavigate }) => {
             </div>
             <div className="priority-card voice-card">
               <VoiceControl onNavigate={onNavigate} />
-            </div>
-            <div className="priority-card help-card">
-              <RequestHelp />
             </div>
           </div>
         </div>
