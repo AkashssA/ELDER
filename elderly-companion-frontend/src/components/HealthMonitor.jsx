@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
@@ -7,7 +7,137 @@ import './HealthMonitor.css';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-// --- NEW: Helper function to format the data log list ---
+// --- Helper constants & utilities ---
+const SUMMARY_ICONS = ['💓', '🩸', '⚖️', '🧘', '🥗', '💧'];
+const EMOJI_BLOCK_REGEX = /[\p{Extended_Pictographic}\u2600-\u27BF]/u;
+const SUMMARY_KEYWORDS = [
+  { key: 'blood pressure', label: 'Blood Pressure' },
+  { key: 'sugar', label: 'Glucose' },
+  { key: 'weight', label: 'Weight' },
+  { key: 'bmi', label: 'BMI' },
+  { key: 'heart rate', label: 'Heart Rate' },
+  { key: 'sleep', label: 'Sleep' },
+  { key: 'hydration', label: 'Hydration' },
+];
+
+const cleanLine = (line) => line.replace(/^[-–•\d.()\s]+/, '').trim();
+
+const isDividerBlock = (block) => /^[-_*]+$/.test(block.replace(/\s/g, ''));
+const isEmojiBlock = (block) => block.length <= 4 && EMOJI_BLOCK_REGEX.test(block);
+const shouldDropBlock = (block) => {
+  const normalized = block.toLowerCase();
+  return SUMMARY_KEYWORDS.some(({ key }) => normalized === key);
+};
+
+const parseSummarySections = (text) => {
+  if (!text) return [];
+  const rawBlocks = text.split(/\n\s*\n/).map((block) => block.trim()).filter(Boolean);
+  if (!rawBlocks.length) return [];
+
+  const combinedBlocks = [];
+  for (let i = 0; i < rawBlocks.length; i += 1) {
+    let block = rawBlocks[i];
+    if (!block || shouldDropBlock(block) || isDividerBlock(block)) {
+      continue;
+    }
+
+    if (isEmojiBlock(block) && i + 1 < rawBlocks.length) {
+      let combined = block;
+      let offset = 1;
+      while (i + offset < rawBlocks.length && !isEmojiBlock(rawBlocks[i + offset])) {
+        const nextBlock = rawBlocks[i + offset];
+        if (shouldDropBlock(nextBlock) || isDividerBlock(nextBlock)) {
+          offset += 1;
+          continue;
+        }
+        combined += `\n${nextBlock}`;
+        offset += 1;
+        if (offset > 2) break;
+      }
+      combinedBlocks.push(combined);
+      i += offset - 1;
+      continue;
+    }
+
+    combinedBlocks.push(block);
+  }
+
+  const blocks = combinedBlocks.length ? combinedBlocks : rawBlocks;
+
+  if (!blocks.length) return [];
+
+  return blocks.map((block, index) => {
+    const lines = block.split('\n').map((line) => cleanLine(line)).filter(Boolean);
+    if (!lines.length) {
+      return null;
+    }
+
+    let icon = null;
+    if (lines.length && isEmojiBlock(lines[0])) {
+      icon = lines[0];
+      lines.shift();
+    }
+
+    let firstLine = lines[0] || '';
+    let title = `Insight ${index + 1}`;
+    let items = [];
+
+    if (/^insight\s+\d+/i.test(firstLine)) {
+      title = firstLine.replace(/insight/i, 'Care insight').trim();
+      lines.shift();
+      firstLine = lines[0] || '';
+    }
+
+    const headingMatch = firstLine.match(/^#{1,6}\s*(.+)$/);
+    if (headingMatch) {
+      title = headingMatch[1].trim();
+      lines.shift();
+      firstLine = lines[0] || '';
+    }
+
+    if (/^\d+\.\s+/.test(firstLine)) {
+      title = firstLine.replace(/^\d+\.\s*/, '').trim();
+      lines.shift();
+      firstLine = lines[0] || '';
+    }
+
+    if (firstLine.toLowerCase().includes(':')) {
+      const [rawTitle, remainder] = firstLine.split(':');
+      title = rawTitle.trim() || title;
+      if (remainder && remainder.trim()) {
+        items.push(remainder.trim());
+      }
+      items = items.concat(lines.slice(1));
+    } else if (lines.length > 1) {
+      title = firstLine;
+      items = lines.slice(1);
+    } else {
+      items = [firstLine];
+    }
+
+    if (!items.length) {
+      items = ['Keep up the great work and maintain healthy routines.'];
+    }
+
+    const filteredItems = lines
+      .filter((line) => !shouldDropBlock(line) && !isDividerBlock(line))
+      .map((line) => line.replace(/^#{1,6}\s*/, ''));
+
+    if (!filteredItems.length) {
+      filteredItems.push(firstLine || 'Keep up the great work and maintain healthy routines.');
+    }
+
+    return { title, items: filteredItems, icon };
+  }).filter(Boolean);
+};
+
+const extractHighlightChips = (text) => {
+  if (!text) return [];
+  const normalized = text.toLowerCase();
+  return SUMMARY_KEYWORDS.filter(({ key }) => normalized.includes(key)).map(({ label }) => label);
+};
+
+// --- Helper function to format the data log list ---
 const formatDataPoint = (metric) => {
   const date = new Date(metric.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
   switch (metric.metricType) {
@@ -33,6 +163,8 @@ const HealthMonitor = () => {
   const [summary, setSummary] = useState(null);
   const [summaryError, setSummaryError] = useState('');
   const [isSummaryLoading, setIsSummaryLoading] = useState(false);
+  const parsedSummarySections = useMemo(() => parseSummarySections(summary), [summary]);
+  const summaryChips = useMemo(() => extractHighlightChips(summary), [summary]);
   
   useEffect(() => {
     fetchData();
@@ -226,13 +358,40 @@ const HealthMonitor = () => {
               {isSummaryLoading ? 'Analyzing...' : 'Generate My AI Summary'}
             </button>
             {summary && (
-              <div className="summary-report">
-                <pre>{summary}</pre>
+              <div className="summary-report enhanced">
+                {summaryChips.length > 0 && (
+                  <div className="summary-chips">
+                    {summaryChips.map((chip) => (
+                      <span key={chip} className="summary-chip">{chip}</span>
+                    ))}
+                  </div>
+                )}
+                {parsedSummarySections.length > 0 ? (
+                  <div className="summary-grid">
+                    {parsedSummarySections.map((section, index) => (
+                      <article key={`${section.title}-${index}`} className="summary-card">
+                        <div className="summary-card-icon" aria-hidden="true">
+                          {section.icon || SUMMARY_ICONS[index % SUMMARY_ICONS.length]}
+                        </div>
+                        <div>
+                          <h4>{section.title}</h4>
+                          <ul>
+                            {section.items.map((item, itemIndex) => (
+                              <li key={`${section.title}-${itemIndex}`}>{item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="summary-plain">{summary}</p>
+                )}
               </div>
             )}
             {summaryError && (
-              <div className="summary-report">
-                <pre>{summaryError}</pre>
+              <div className="summary-report summary-error">
+                {summaryError}
               </div>
             )}
           </div>

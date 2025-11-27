@@ -14,6 +14,7 @@ import MemoryGame from '../components/MemoryGame';
 import CommunityEvents from '../components/CommunityEvents';
 import Chatbot from '../components/Chatbot';
 import ProactiveAssistant from '../components/ProactiveAssistant';
+import MoodTracker from '../components/MoodTracker';
 import { subscribeUser } from '../utils/subscribeUser';
 
 const ElderlyDashboard = ({ onLogout }) => {
@@ -45,6 +46,7 @@ const ElderlyDashboard = ({ onLogout }) => {
     gallery: 'Photo Gallery',
     entertainment: 'Entertainment',
     wellness: 'Wellness Library',
+    mood: 'Mood Check-in',
     game: 'Memory Game',
     events: 'Community Events',
     chatbot: 'AI Companion'
@@ -77,6 +79,9 @@ const ElderlyDashboard = ({ onLogout }) => {
         break;
       case 'wellness':
         componentToRender = <WellnessLibrary />;
+        break;
+      case 'mood':
+        componentToRender = <MoodTracker />;
         break;
       case 'game':
         componentToRender = <MemoryGame />;

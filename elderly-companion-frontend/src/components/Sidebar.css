@@ -1,7 +1,7 @@
 .sidebar {
   width: 250px;
   height: 100vh;
-  background-color: #2c3e50;
+  background: radial-gradient(circle at top, #1f1f2b, #090911);
   color: #ecf0f1;
   display: flex;
   flex-direction: column;
@@ -9,13 +9,14 @@
   top: 0;
   left: 0;
   transition: width 0.3s ease-in-out;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 24px 65px rgba(15, 23, 42, 0.55);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* --- THIS IS THE FIX --- */
 .sidebar-header {
   padding: 1.5rem;
-  background-color: #34495e;
+  background: rgba(255, 255, 255, 0.05);
   
   /* Use Flexbox to align items */
   display: flex;
@@ -35,7 +36,7 @@
   background: none;
   border: none;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
   
   /* Remove the old, broken positioning */
@@ -80,11 +81,11 @@
   align-items: center;
   padding: 1rem 1.5rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.2s;
   overflow: hidden;
   white-space: nowrap;
 }
-.menu-item:hover { background-color: #34495e; }
-.menu-item.active { background-color: var(--primary-color); color: #fff; }
-.menu-item .icon { font-size: 1.5rem; margin-right: 1rem; }
-.menu-item .label { font-size: 1.1rem; }
+.menu-item:hover { background-color: rgba(255, 255, 255, 0.08); transform: translateX(8px); }
+.menu-item.active { background: linear-gradient(90deg, var(--primary-color), var(--primary-light)); color: #fff; border-radius: 0 24px 24px 0; }
+.menu-item .icon { font-size: 1.4rem; margin-right: 1rem; }
+.menu-item .label { font-size: 1rem; letter-spacing: 0.02em; }

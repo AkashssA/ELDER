@@ -11,6 +11,7 @@ const Sidebar = ({ isOpen, setIsOpen, activeView, setActiveView }) => {
     { id: 'gallery', label: 'Photo Gallery', icon: '🖼️' },
     { id: 'entertainment', label: 'Entertainment', icon: '🎬' },
     { id: 'wellness', label: 'Wellness', icon: '🧘' },
+    { id: 'mood', label: 'Mood Check-in', icon: '🌤️' },
     { id: 'game', label: 'Memory Game', icon: '🧠' },
     { id: 'events', label: 'Community', icon: '🎉' },
     { id: 'chatbot', label: 'AI Companion', icon: '🤖' },
